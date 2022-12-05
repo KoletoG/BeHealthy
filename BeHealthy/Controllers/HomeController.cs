@@ -2,7 +2,7 @@
 using BeHealthy.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
+using static BeHealthy.Static_methods.Calculators;
 namespace BeHealthy.Controllers
 {
     public class HomeController : Controller
@@ -17,7 +17,6 @@ namespace BeHealthy.Controllers
 
         public IActionResult Index()
         {
-            
             return View();
         }
 

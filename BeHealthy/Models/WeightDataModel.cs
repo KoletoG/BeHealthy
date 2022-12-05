@@ -5,21 +5,25 @@ namespace BeHealthy.Models
 {
     public class WeightDataModel
     {
-        public WeightDataModel()
+        public WeightDataModel(UserDataModel user)
         {
-            
+            this.Id = Guid.NewGuid().ToString();
+            this.User= user;
+            this.DayStarted= DateTime.Now;
         }
         [Required]
         [PersonalData]
         [Key]
         public string Id { get; set; }
-        [ProtectedPersonalData]
-        public double? Height { get; set; }
         public UserDataModel User { get; set; }
+        [ProtectedPersonalData]
+        public double? Calories { get; set; }
         [ProtectedPersonalData]
         public double? BMI { get; set; }
         [ProtectedPersonalData]
-        public decimal? BodyFatPercentage { get; set; }
+        public double? LBM { get; set; }
+        [ProtectedPersonalData]
+        public decimal? BFP { get; set; }
         [DataType(DataType.DateTime)]
         [Required]
         public DateTime DayStarted { get; set; }

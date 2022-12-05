@@ -17,11 +17,13 @@ namespace BeHealthy.Models
         [System.ComponentModel.DataAnnotations.Required]
         [Key]
         public override string Id { get; set; }
+        [PersonalData]
+        public double? Height { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
-        [ProtectedPersonalData]
+        [PersonalData]
         public override string UserName { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
-        [ProtectedPersonalData]
+        [PersonalData]
         public int Age { get; set; }
 
     }
