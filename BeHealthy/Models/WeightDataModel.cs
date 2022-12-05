@@ -11,21 +11,17 @@ namespace BeHealthy.Models
         }
         [Required]
         [PersonalData]
+        [Key]
         public string Id { get; set; }
-        [Required]
+        [ProtectedPersonalData]
+        public double? Height { get; set; }
         public UserDataModel User { get; set; }
-        [Required]
-        [ProtectedPersonalData]
-        public List<double> Weight { get; set; }
-        [Required]
-        [ProtectedPersonalData]
-        public double Height { get; set; }
         [ProtectedPersonalData]
         public double? BMI { get; set; }
         [ProtectedPersonalData]
         public decimal? BodyFatPercentage { get; set; }
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Required]
-        public DateOnly DayStarted { get; set; }
+        public DateTime DayStarted { get; set; }
     }
 }

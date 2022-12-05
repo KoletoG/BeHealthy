@@ -19,6 +19,10 @@ namespace BeHealthy
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddTransient<IWeightRepository, WeightRepository>();
+            builder.Services.AddTransient<IWeightHistoryRepository, WeightHistoryRepository>();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            
             builder.Services.AddDefaultIdentity<UserDataModel>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;

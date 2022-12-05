@@ -15,6 +15,7 @@ namespace BeHealthy.Models
         [ProtectedPersonalData]
         public override string Email { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
+        [Key]
         public override string Id { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         [ProtectedPersonalData]

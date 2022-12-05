@@ -4,6 +4,7 @@ using BeHealthy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeHealthy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205162406_FixedMayb")]
+    partial class FixedMayb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,6 +81,9 @@ namespace BeHealthy.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("WeightDataId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -88,6 +93,8 @@ namespace BeHealthy.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("WeightDataId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -109,15 +116,30 @@ namespace BeHealthy.Data.Migrations
                     b.Property<double?>("Height")
                         .HasColumnType("float");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.HasKey("Id");
+
+                    b.ToTable("WeightDatas");
+                });
+
+            modelBuilder.Entity("BeHealthy.Models.WeightHistoryDataModel", b =>
+                {
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.Property<string>("WeightDataModelId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("WeightDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("WeightDataModelId");
 
-                    b.ToTable("WeightDatas");
+                    b.ToTable("WeightHistoryDataModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -257,15 +279,20 @@ namespace BeHealthy.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BeHealthy.Models.WeightDataModel", b =>
+            modelBuilder.Entity("BeHealthy.Models.UserDataModel", b =>
                 {
-                    b.HasOne("BeHealthy.Models.UserDataModel", "User")
+                    b.HasOne("BeHealthy.Models.WeightDataModel", "WeightData")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WeightDataId");
 
-                    b.Navigation("User");
+                    b.Navigation("WeightData");
+                });
+
+            modelBuilder.Entity("BeHealthy.Models.WeightHistoryDataModel", b =>
+                {
+                    b.HasOne("BeHealthy.Models.WeightDataModel", null)
+                        .WithMany("Weights")
+                        .HasForeignKey("WeightDataModelId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -317,6 +344,11 @@ namespace BeHealthy.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BeHealthy.Models.WeightDataModel", b =>
+                {
+                    b.Navigation("Weights");
                 });
 #pragma warning restore 612, 618
         }

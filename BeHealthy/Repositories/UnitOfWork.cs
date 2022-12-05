@@ -9,8 +9,12 @@ namespace BeHealthy.Repositories
         {
             _context= context;
             WeightRepository = new WeightRepository(_context);
+            WeightHistoryRepository= new WeightHistoryRepository(_context); 
+            UserRepository= new UserRepository(_context);
         }
         public IWeightRepository WeightRepository { get; set; }
+        public IWeightHistoryRepository WeightHistoryRepository { get; set; }
+        public IUserRepository UserRepository { get; set; }
         public async Task<int> CompleteAsync()
         {
             return await _context.SaveChangesAsync();

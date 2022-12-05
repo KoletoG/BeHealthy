@@ -1,4 +1,5 @@
 ﻿using BeHealthy.Models;
+using BeHealthy.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,14 +8,16 @@ namespace BeHealthy.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private IUnitOfWork _unitOfWork;
+        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork)
         {
+            _unitOfWork= unitOfWork;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
