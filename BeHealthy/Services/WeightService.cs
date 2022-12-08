@@ -1,25 +1,37 @@
-﻿namespace BeHealthy.Services
+﻿using BeHealthy.Repositories;
+
+namespace BeHealthy.Services
 {
     public class WeightService : IWeightService
     {
-        public async Task AddBMI(double value, string nameOfUser)
+        private IUnitOfWork _unitOfWork;
+        public WeightService(IUnitOfWork unitOfWork) 
         {
-            throw new NotImplementedException();
+            _unitOfWork= unitOfWork;
         }
-
-        public async Task AddBodyFatPercentage(decimal value, string nameOfUser)
+        public async Task AddBMIAsync(double value, string nameOfUser)
         {
-            throw new NotImplementedException();
+            var currentWeightM = await _unitOfWork.WeightRepository.GetByUserNameAsync(nameOfUser);
+            currentWeightM.BMI = value;
+            await _unitOfWork.CompleteAsync();
         }
-
-        public async Task AddCalories(double value, string nameOfUser)
+        public async Task AddBodyFatPercentageAsync(decimal value, string nameOfUser)
         {
-            throw new NotImplementedException();
+            var currentWeightM = await _unitOfWork.WeightRepository.GetByUserNameAsync(nameOfUser);
+            currentWeightM.BFP = value;
+            await _unitOfWork.CompleteAsync();
         }
-
-        public async Task AddLBM(double value, string nameOfUser)
+        public async Task AddCaloriesAsync(double value, string nameOfUser)
         {
-            throw new NotImplementedException();
+            var currentWeightM = await _unitOfWork.WeightRepository.GetByUserNameAsync(nameOfUser);
+            currentWeightM.Calories = value;
+            await _unitOfWork.CompleteAsync();
+        }
+        public async Task AddLBMAsync(double value, string nameOfUser)
+        {
+            var currentWeightM = await _unitOfWork.WeightRepository.GetByUserNameAsync(nameOfUser);
+            currentWeightM.LBM = value;
+            await _unitOfWork.CompleteAsync();
         }
     }
 }

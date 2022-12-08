@@ -4,9 +4,9 @@ namespace BeHealthy.Services
 {
     public interface IWeightService
     {
-        public Task AddBMI(double value, string nameOfUser);
-        public Task AddBodyFatPercentage(decimal value, string nameOfUser);
-        public Task AddCalories(double value, string nameOfUser);
-        public Task AddLBM(double value, string nameOfUser);
+        public Task AddBMIAsync(double value, string nameOfUser);
+        public Task AddBodyFatPercentageAsync(decimal value, string nameOfUser);
+        public Task AddCaloriesAsync(double value, string nameOfUser);
+        public Task AddLBMAsync(double value, string nameOfUser);
     }
 }

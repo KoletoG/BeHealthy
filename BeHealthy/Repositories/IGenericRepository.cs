@@ -6,6 +6,7 @@ namespace BeHealthy.Repositories
     {
         Task<T> GetById(string id);
         Task<IEnumerable<T>> GetAll();
+        Task<T> GetByUserNameAsync(string userName);
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
         Task Add(T entity);
         Task AddRange(IEnumerable<T> entities);

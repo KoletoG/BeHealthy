@@ -2,21 +2,41 @@
 {
     public static class Calculators
     {
-        public static decimal BodyFatCalculator(int age, bool male,double weight, double height, int neck, int waist)
+        public static decimal BodyFatCalculator(decimal weight, decimal wrist, decimal waist, decimal hip, decimal forearm)
         {
-            return 0;
+            decimal lean = weight * 0.732m + 8.987m + wrist / 3.140m - waist * 0.157m - hip * 0.249m + forearm * 0.434m;
+            decimal bfw = weight - lean;
+            return bfw / weight;
         }
-        public static double BMICalculator(int age, bool male, double height, double weight)
+        public static decimal BodyFatCalculator(decimal weight, decimal waist)
         {
-            return 0;
+            decimal lean = weight * 1.082m + 94.42m - waist * 4.15m;
+            decimal bfw = weight - lean;
+            return bfw / weight;
         }
-        public static double CalorieCalculator(int age, bool male, double height, double weight,int activity)
+        public static double BMICalculator(double height, double weight)
         {
-            return 0;
+            return (weight / (height * height));
         }
-        public static double LBMCalculator(bool male, bool ageOver14, double height, double weight)
+        public static double CalorieCalculator(int age, bool male, double height, double weight, double activity)
         {
-            return 0;
+            if (male == true)
+            {
+                return (66 + (6.3 * weight) + (12.9 * height) - (6.8 * age)) * activity;
+            }
+            else
+            {
+                return (655 + (4.3 * weight) + (4.7 * height) - (4.7 * age)) * activity;
+            }
+        }
+        public static decimal LBMCalculator(decimal weight, decimal wrist, decimal waist, decimal hip, decimal forearm)
+        {
+            return weight * 0.732m + 8.987m + wrist / 3.140m - waist * 0.157m - hip * 0.249m + forearm * 0.434m;
+
+        }
+        public static decimal LBMCalculator(decimal weight, decimal waist)
+        {
+            return weight * 1.082m + 94.42m - waist * 4.15m;
         }
     }
 }

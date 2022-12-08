@@ -15,6 +15,11 @@ namespace BeHealthy.Repositories
         {
             return _context.Set<T>().Where(expression);
         }
+        public async Task<T> GetByUserNameAsync(string userName)
+        {
+
+            return await _context.Set<T>().FindAsync(userName);
+        }
         public async Task<T> GetById(string id)
         {
            return await _context.Set<T>().FindAsync(id);
