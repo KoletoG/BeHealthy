@@ -1,6 +1,7 @@
 using BeHealthy.Data;
 using BeHealthy.Models;
 using BeHealthy.Repositories;
+using BeHealthy.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,8 @@ namespace BeHealthy
             builder.Services.AddTransient<IWeightHistoryRepository, WeightHistoryRepository>();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-            
+            builder.Services.AddTransient<IWeightService,WeightService>();
+            builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddDefaultIdentity<UserDataModel>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
