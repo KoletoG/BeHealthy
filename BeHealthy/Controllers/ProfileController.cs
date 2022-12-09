@@ -1,14 +1,28 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BeHealthy.Repositories;
+using BeHealthy.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeHealthy.Controllers
 {
+    [Route("Profile")]
+    [Route("[controller]/[action]")]
     public class ProfileController : Controller
     {
         // GET: ProfileController
-        public IActionResult Index()
+        private IUnitOfWork _unitOfWork;
+        public ProfileController(IUnitOfWork unitOfWork)
         {
-            return View();
+            _unitOfWork = unitOfWork;
+        }
+        public async Task<IActionResult> Profile()
+        {
+            var profView = new ProfileViewModel();
+            var curUser = await _unitOfWork.UserRepository.GetByUserName(this.User.Identity.Name);
+            var curWeightData = await _unitOfWork.WeightRepository.GetByUserNameAsync(this.User.Identity.Name);
+            profView.WeightData = curWeightData;
+            profView.User= curUser;
+            return View(profView);
         }
 
     }

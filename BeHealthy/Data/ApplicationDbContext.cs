@@ -11,5 +11,6 @@ namespace BeHealthy.Data
         {
         }
         public DbSet<WeightDataModel> WeightDatas { get; set; }
+        public DbSet<WeightHistoryDataModel> WeightHistoryDatas { get; set;}
     }
 }

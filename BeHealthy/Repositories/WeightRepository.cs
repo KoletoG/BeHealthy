@@ -1,5 +1,6 @@
 ﻿using BeHealthy.Data;
 using BeHealthy.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeHealthy.Repositories
 {
@@ -9,6 +10,9 @@ namespace BeHealthy.Repositories
         {
             
         }
-        
+        public async Task<WeightDataModel> GetByUserName(string userName)
+        {
+            return await _context.WeightDatas.Where(x=>x.User.UserName==userName).SingleOrDefaultAsync();
+        }
     }
 }
