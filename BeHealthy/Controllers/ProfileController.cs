@@ -27,6 +27,9 @@ namespace BeHealthy.Controllers
         public async Task<IActionResult> SetAge(int age)
         {
             var curUser = await _unitOfWork.UserRepository.GetByUserName(this.User.Identity.Name);
+            curUser.Age = age;
+            _unitOfWork.UserRepository.Update(curUser);
+            await _unitOfWork.CompleteAsync();
             return RedirectToAction("Profile");
         }
     }

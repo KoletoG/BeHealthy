@@ -22,7 +22,7 @@ namespace BeHealthy.Repositories
         }
         public async Task<T> GetById(string id)
         {
-           return await _context.Set<T>().FindAsync(id);
+            return await _context.Set<T>().FindAsync(id);
         }
         public async Task<IEnumerable<T>> GetAll()
         {
@@ -34,7 +34,11 @@ namespace BeHealthy.Repositories
         }
         public async Task AddRange(IEnumerable<T> entities)
         {
-           await _context.Set<T>().AddRangeAsync(entities);
+            await _context.Set<T>().AddRangeAsync(entities);
+        }
+        public void Update(T entity)
+        {
+            _context.Set<T>().Update(entity);
         }
         public void Remove(T entity)
         {

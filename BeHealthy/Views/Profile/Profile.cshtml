@@ -10,6 +10,11 @@
     {
         <h2 class="text-danger fs-3 fw-bold fst-italic">Please set your age: </h2>
         <hr />
-        <form asp-controller="Profile"></form>
+        <form asp-controller="Profile" asp-action="SetAge">
+            <input type="number" name="age">
+            <button type="submit">Save</button>
+        </form>
     }
+        <h1>@Model.User.Age</h1>
+    
 </body>
