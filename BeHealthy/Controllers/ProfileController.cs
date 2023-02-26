@@ -2,6 +2,7 @@
 using BeHealthy.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BeHealthy.Controllers
 {
@@ -21,7 +22,7 @@ namespace BeHealthy.Controllers
             var curUser = await _unitOfWork.UserRepository.GetByUserName(this.User.Identity.Name);
             var curWeightData = await _unitOfWork.WeightRepository.GetByUserNameAsync(this.User.Identity.Name);
             profView.WeightData = curWeightData;
-            profView.User= curUser;
+            profView.User = curUser;
             return View(profView);
         }
         public async Task<IActionResult> SetAge(int age)
@@ -31,6 +32,15 @@ namespace BeHealthy.Controllers
             _unitOfWork.UserRepository.Update(curUser);
             await _unitOfWork.CompleteAsync();
             return RedirectToAction("Profile");
+        }
+        public async Task<IActionResult> SetHeight(double height)
+        {
+            var curUser = await _unitOfWork.UserRepository.GetByUserName(this.User.Identity.Name);
+            curUser.Height = height;
+            _unitOfWork.UserRepository.Update(curUser);
+            await _unitOfWork.CompleteAsync();
+            return RedirectToAction("Profile");
+
         }
     }
 }

@@ -15,6 +15,22 @@
             <button type="submit">Save</button>
         </form>
     }
+    else
+    {
         <h1>@Model.User.Age</h1>
+    }
+    @if (Model.User.Height == null)
+    {
+        <h2 class="text-danger fs-3 fw-bold fst-italic">Please set your height: </h2>
+        <hr />
+        <form asp-controller="Profile" asp-action="SetHeight">
+            <input type="number" name="height">
+            <button type="submit">Save</button>
+        </form>
+    }
+    else
+    {
+        <h1>@Model.User.Height</h1>
+    }
     
 </body>
