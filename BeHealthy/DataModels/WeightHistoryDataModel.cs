@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BeHealthy.Repositories;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace BeHealthy.Models
@@ -11,6 +12,10 @@ namespace BeHealthy.Models
             this.Id= Guid.NewGuid().ToString();
             this.Weight= weight;
             this.WeightDate= DateTime.Now;
+        }
+        public WeightHistoryDataModel()
+        {
+
         }
         [Key]
         public string Id { get; set; }

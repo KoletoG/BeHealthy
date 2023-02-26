@@ -1,0 +1,15 @@
+﻿@using BeHealthy.ViewModels;
+@model ProfileViewModel
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header class="display-1 fw-bold font-monospace text-center mt-3">Your Profile</header>
+    @if (Model.User.Age == 0)
+    {
+        <h2 class="text-danger fs-3 fw-bold fst-italic">Please set your age: </h2>
+        <hr />
+        <form asp-controller="Profile"></form>
+    }
+</body>

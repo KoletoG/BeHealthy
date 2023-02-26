@@ -24,6 +24,10 @@ namespace BeHealthy.Controllers
             profView.User= curUser;
             return View(profView);
         }
-
+        public async Task<IActionResult> SetAge(int age)
+        {
+            var curUser = await _unitOfWork.UserRepository.GetByUserName(this.User.Identity.Name);
+            return RedirectToAction("Profile");
+        }
     }
 }

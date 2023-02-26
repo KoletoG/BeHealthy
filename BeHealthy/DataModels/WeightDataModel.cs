@@ -11,6 +11,10 @@ namespace BeHealthy.Models
             this.User= user;
             this.DayStarted= DateTime.Now;
         }
+        public WeightDataModel()
+        {
+
+        }
         [Required]
         [PersonalData]
         [Key]
