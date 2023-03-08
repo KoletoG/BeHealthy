@@ -5,12 +5,15 @@ namespace BeHealthy.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(ApplicationDbContext context,
+            IWeightHistoryRepository weightHistoryRepository,
+            IWeightRepository weightRepository,
+            IUserRepository userRepository)
         {
             _context= context;
-            WeightRepository = new WeightRepository(_context);
-            WeightHistoryRepository= new WeightHistoryRepository(_context); 
-            UserRepository= new UserRepository(_context);
+            WeightRepository = weightRepository;
+            WeightHistoryRepository= weightHistoryRepository; 
+            UserRepository= userRepository;
         }
         public IWeightRepository WeightRepository { get; set; }
         public IWeightHistoryRepository WeightHistoryRepository { get; set; }
